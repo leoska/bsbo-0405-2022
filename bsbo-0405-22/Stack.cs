@@ -85,4 +85,10 @@ public class Stack
             Push(tmp.Pop());
         }
     }
+
+    public int this[int index]
+    {
+        get => Get(index, new Stack());
+        set => Set(index, value, new Stack());
+    }
 }

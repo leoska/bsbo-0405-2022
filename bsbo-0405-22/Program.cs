@@ -81,8 +81,12 @@ static class Application
         
         stack.Print();
         
-        SortBubble(stack, tmp, N);
-
+        // Без перегрузки []
+        // SortBubble(stack, tmp, N);
+        
+        // С перегрузкой []
+        SortBubble(stack, N);
+        
         stack.Print();
     }
 
@@ -101,6 +105,26 @@ static class Application
                 {
                     stack.Set(j, neighbor, tmp);
                     stack.Set(j + 1, current, tmp);
+                    flag = true;
+                }
+            }
+
+            if (!flag)
+                break;
+        }
+    }
+
+    static void SortBubble(Stack stack, int N)
+    {
+        bool flag = false;
+        for (int i = 0; i < N; i++)
+        {
+            flag = false;
+            for (int j = 0; j < N - i - 1; j++)
+            {
+                if (stack[j] > stack[j + 1])
+                {
+                    (stack[j], stack[j + 1]) = (stack[j + 1], stack[j]);
                     flag = true;
                 }
             }
