@@ -5,6 +5,7 @@ namespace bsbo_0405_22;
 
 static class Application
 {
+    public static long countOpers = 0;
     static void PrintArray(int[] arr)
     {
         foreach (int item in arr)
@@ -67,10 +68,17 @@ static class Application
         // SortBubble(arr);
         // PrintArray(arr);
 
+        SortStack();
+        // SortQueueElem();
+    }
+    
+
+    static void SortStack()
+    {
         // Практика №2 (сортировка линейного списка Стэк)
         Stack stack = new Stack();
         Stack tmp = new Stack();
-        int N = 10;
+        int N = 100;
 
         Random rnd = new Random();
 
@@ -88,6 +96,8 @@ static class Application
         SortBubble(stack, N);
         
         stack.Print();
+        
+        Console.WriteLine($"N_OP: {countOpers}");
     }
 
     static void SortBubble(Stack stack, Stack tmp, int N)
@@ -132,5 +142,46 @@ static class Application
             if (!flag)
                 break;
         }
+    }
+
+    static void SortQueueElem()
+    {
+        QueueElem<int> queue = new QueueElem<int>();
+        Random rnd = new Random();
+
+        int N = 5;
+
+        for (int i = 0; i < N; i++)
+        {
+            queue.Enqueue(rnd.Next(0, 100));
+        }
+
+        queue.Print();
+        
+        bool flag = false;
+        for (int i = 0; i < N; i++)
+        {
+            flag = false;
+            for (int j = 0; j < N - i - 1; j++)
+            {
+                if (queue[j] > queue[j + 1])
+                {
+                    (queue[j], queue[j + 1]) = (queue[j + 1], queue[j]);
+                    flag = true;
+                }
+
+                // if (queue.Get(j) > queue.Get(j + 1))
+                // {
+                //     int tmp = queue.Get(j);
+                //     queue.Set(j, queue.Get(j + 1));
+                //     queue.Set(j + 1, tmp);
+                // }
+            }
+
+            if (!flag)
+                break;
+        }
+        
+        queue.Print();
     }
 }
